@@ -30,6 +30,12 @@ function ItemForm(props) {
         navigate('/')
     }
 
+    const handleDelete = () => {
+        props.onItemDelete(values.id)
+        navigate(-1)
+    }
+
+
     return (
         <form onSubmit={handleSubmit}>
             <div className={styles.itemform}>
@@ -85,7 +91,16 @@ function ItemForm(props) {
                         {props.formData ? "TALLENNA" : "LISÄÄ"}
                     </Button>
                 </div>
+
             </div>
+            {props.onItemDelete ?
+                <div className={styles.itemform_row}>
+                    <div>
+                        <Button secondary onClick={handleDelete}>POISTA</Button>
+                    </div>
+                    <div></div>
+                </div>
+                : null}
 
         </form>
     )
