@@ -41,7 +41,8 @@ function AppRouter(props) {
                 { path: "stats", element: <Stats /> },
                 {
                     path: "settings",
-                    element: <Settings typelist={props.typelist} />
+                    element: <Settings typelist={props.typelist}
+                        onTypeSubmit={props.onTypeSubmit} />
                 }
 
             ]
