@@ -1,5 +1,6 @@
 // Tuodaan Firebase-sovelluksen alustusfunktio
 import { initializeApp } from 'firebase/app'
+import { getAuth } from 'firebase/auth'
 
 // Määritellään sovelluksen Firebase-asetukset
 const firebaseConfig = {
@@ -15,3 +16,4 @@ const firebaseConfig = {
 const firebase = initializeApp(firebaseConfig)
 
 export default firebase
+export const auth = getAuth(firebase)

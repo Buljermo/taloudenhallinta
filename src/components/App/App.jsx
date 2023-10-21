@@ -1,11 +1,14 @@
 import AppRouter from '../AppRouter'
 import { useState } from 'react'
 import useLocalStorage from '../../shared/uselocalstorage'
-import firebase from './firebase.js'
+import firebase, { auth } from './firebase.js'
 import { addDoc, collection, deleteDoc, doc, getFirestore, onSnapshot, orderBy, query, setDoc } from 'firebase/firestore'
 import { useEffect } from 'react'
+import { onAuthStateChanged } from 'firebase/auth'
+import Startup from '../Startup'
 
 function App() {
+  const [user, setUser] = useState()
   const [data, setData] = useState([])
   const firestore = getFirestore(firebase)
   const [typelist, setTypelist] = useState([])
@@ -36,6 +39,12 @@ function App() {
     return unsubscribe
   }, [])
 
+  useEffect(() => {
+    onAuthStateChanged(auth, user => {
+      setUser(user)
+    })
+  }, [])
+
 
   const handleItemDelete = async (id) => {
     await deleteDoc(doc(firestore, 'item', id))
@@ -47,16 +56,20 @@ function App() {
 
 
   const handleTypeSubmit = async (type) => {
-    await addDoc(collection(firestore,'type'),{type: type})
+    await addDoc(collection(firestore, 'type'), { type: type })
   }
 
   return (
     <>
-      <AppRouter data={data}
-        typelist={typelist}
-        onItemSubmit={handleItemSubmit}
-        onItemDelete={handleItemDelete}
-        onTypeSubmit={handleTypeSubmit} />    </>
+      {user ?
+        <AppRouter data={data}
+          typelist={typelist}
+          onItemSubmit={handleItemSubmit}
+          onItemDelete={handleItemDelete}
+          onTypeSubmit={handleTypeSubmit} />
+        : <Startup auth={auth} />
+      }
+    </>
   )
 }
 
