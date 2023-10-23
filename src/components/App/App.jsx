@@ -66,7 +66,9 @@ function App() {
           typelist={typelist}
           onItemSubmit={handleItemSubmit}
           onItemDelete={handleItemDelete}
-          onTypeSubmit={handleTypeSubmit} />
+          onTypeSubmit={handleTypeSubmit}
+          auth={auth}
+          user={user} />
         : <Startup auth={auth} />
       }
     </>

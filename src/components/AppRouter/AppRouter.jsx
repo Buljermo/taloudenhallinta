@@ -42,9 +42,10 @@ function AppRouter(props) {
                 {
                     path: "settings",
                     element: <Settings typelist={props.typelist}
-                        onTypeSubmit={props.onTypeSubmit} />
+                        onTypeSubmit={props.onTypeSubmit}
+                        user={props.user}
+                        auth={props.auth} />
                 }
-
             ]
         }
     ])
