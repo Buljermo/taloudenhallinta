@@ -4,7 +4,7 @@ Harjoitustyönä toteutettu React-projekti, jolla voi kirjata ja seurata omia me
 
 ## Kuvaruutukopiot
 
-![Pääsivu](/screenshot1.png?raw=true)
+![Pääsivu](/screenshot.png?raw=true)
 
 ## Tekniikat
 
